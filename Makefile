@@ -1,8 +1,8 @@
 NAME	:= so_long
-CFLAGS	:= -Werror -Wextra -Wall 
-LIBMLX	:= ./lib/MLX42
+CFLAGS	:=  -Wextra -Wall #Werror
+LIBMLX	:= ./lib/
 CC		:= gcc
-LIBS	:= $(LIBMLX)/libmlx42.a $(LIBMLX)/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
+LIBS	:= $(LIBMLX)/libmlx.a -framework Cocoa -framework OpenGL -framework IOKit
 SRCS	:= $(shell find ./src -iname "*.c")
 OBJS	:= ${SRCS:.c=.o}
 
@@ -24,8 +24,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f ./libmlx42.a 
-	@rm -f ./libglfw3.a
+	@rm -f ./libmlx.a 
 	@$(MAKE) -C $(LIBMLX) fclean
 
 re: clean all
