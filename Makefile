@@ -4,6 +4,7 @@ LIBMLX	:= ./lib/
 CC		:= gcc
 LIBS	:= $(LIBMLX)/libmlx.a -framework Cocoa -framework OpenGL -framework IOKit
 SRCS	:= $(shell find ./src -iname "*.c")
+AR		:= ar rcs
 OBJS	:= ${SRCS:.c=.o}
 
 all: libmlx $(NAME)
@@ -16,6 +17,7 @@ libmlx:
 
 
 $(NAME): $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
