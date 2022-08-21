@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/08/20 17:51:55 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/08/21 13:55:03 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,14 @@ static int	file_linecount(char *file)
 }
 
 /* Allocates memory for a string array with the same lines as the file */
-static char	**alloc_columns(char *file)
+static char	**alloc_columns(char *file, int *line_count)
 {
 	char	**map;
-	int		line_count;
 
-	line_count = file_linecount(file);
-	if (line_count <= 0)
+	*line_count = file_linecount(file);
+	if (*line_count <= 0)
 		return (null_error("open or reading error, the file may not exist"));
-	map = malloc(sizeof(char *) * line_count + 1);
+	map = malloc(sizeof(char *) * *line_count + 1);
 	if (map == NULL)
 		return (null_error("malloc error on alloc_map()"));
 	return (map);
@@ -71,19 +70,22 @@ char	**read_map(char *file)
 {
 	char	**map;
 	int		fd;
+	int		line_count;
 	int		i;
 
-	map = alloc_columns(file);
+	i = 0;
+	line_count = 0;
+	map = alloc_columns(file, &line_count);
+	printf("Line count: %d", line_count);
 	if (map == NULL)
 		return (NULL);
 	fd = open(file, O_RDONLY);
-	*map = get_next_line(fd);
-	while(*map != NULL)
+	while(line_count > 0)
 	{
-		*map = get_next_line(fd);
-		printf("%s", *map);
+		map[i] = get_next_line(fd);
+		line_count--;
+		i++;
 	}
-
 	return (map);
 }
 
@@ -91,9 +93,12 @@ t_tile	**map_init(int argc, char **argv, t_game *game)
 {
 	char	**map;
 	t_tile	**tilemap;
+	int		x = 0;
+	int		y = 0;
 
 
 	map = read_map(argv[1]);
+
 	return (tilemap);
 }
 
