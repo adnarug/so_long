@@ -1,5 +1,5 @@
-NAME	:= so_long.a
-CFLAGS	:= -Wextra -Wall #Werror
+NAME	:= so_long
+CFLAGS	:= -Wall -Wextra #Werror
 LIBMLX	:= lib/
 CC		:= cc
 LIBS	:= $(LIBMLX)/libmlx.a -framework Cocoa -framework OpenGL -framework IOKit
@@ -13,6 +13,10 @@ GREEN = \033[0;92m
 
 SRC_FILES	=	get_next_line\
 				get_next_line_utils\
+				new_panel\
+				game_init\
+				utils\
+				tilemap\
 				main
 
 SRC		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -27,17 +31,17 @@ OBJF	=	.cache_exists
 
 $(NAME)	:	$(OBJ)
 	@$(AR) $(NAME) $(OBJ)
-	@$(CC) so_long.a -o so_long
+	@$(CC) $(LIBS) so_long.a -o so_long
 	@echo "$(GREEN)so_long compiled!$(DEF_COLOR)"
 
 $(OBJF):
-		@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o	:	$(SRC_DIR)%.c | $(OBJF)
-		@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ_DIR)
+	@rm -r $(OBJ_DIR)
 	@$(MAKE) -C $(LIBMLX) clean
 
 fclean: clean

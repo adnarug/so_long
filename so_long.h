@@ -3,7 +3,9 @@
 
 # include "./lib/mlx.h"
 # include <stdlib.h>
+# include <stdio.h>//to be deleted
 # include <fcntl.h>
+# include <string.h>//to be deleted
 # include <unistd.h>
 
 # define IMG_SIZE 64
@@ -188,5 +190,14 @@ typedef struct s_mapcheckerdata
 	t_bool		b_collect;
 }				t_mapcheckerdata;
 
-
+void	game_init(t_game *game);
+int		end_program(t_game *game);
+t_tile	**generate_tilemap(char **map, t_game *game);
+int		error(char *message);
+void	print_warning(char *message);
+int		ft_chartable_linecount(char **table);
+void	ft_free_chartable(char **table);
+void	*new_panel(t_game *game, t_color color);
+t_color	new_color(int r, int g, int b, int a);
+void	color_panel(t_panel *panel, t_color color);
 #endif
