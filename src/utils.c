@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:46:44 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/08 10:04:57 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/09 10:39:59 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,29 @@ void	free_tilemap(t_game *game)
 	free (tilemap);
 }
 
-void	free_enemies(t_game *game)
-{
-	t_enemy	*next;
+// void	free_enemies(t_game *game)
+// {
+// 	t_enemy	*next;
 
-	if (game->enemy_list == NULL)
-		return ;
-	while (TRUE)
-	{
-		next = game->enemy_list->next;
-		free (game->enemy_list);
-		if (next == NULL)
-			break ;
-		game->enemy_list = next;
-	}
-}
+// 	if (game->enemy_list == NULL)
+// 		return ;
+// 	while (TRUE)
+// 	{
+// 		next = game->enemy_list->next;
+// 		free (game->enemy_list);
+// 		if (next == NULL)
+// 			break ;
+// 		game->enemy_list = next;
+// 	}
+// }
 
 /* Frees all allocated memory and makes exit(0) */
 int	end_program(t_game *game)
 {
 	free_tilemap(game);
 	game->tilemap = NULL;
-	free_enemies(game);
-	game->enemy_list = NULL;
+	// free_enemies(game);
+	// game->enemy_list = NULL;
 	exit(0);
 }
 

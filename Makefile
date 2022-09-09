@@ -1,5 +1,5 @@
-NAME	:= so_long
-CFLAGS	:= -Wall -Wextra #Werror
+NAME	:= so_long.a
+CFLAGS	:= -Wall -Wextra -g #Werror
 LIBMLX	:= lib/
 CC		:= cc
 LIBS	:= $(LIBMLX)/libmlx.a -framework Cocoa -framework OpenGL -framework IOKit
@@ -13,9 +13,10 @@ GREEN = \033[0;92m
 
 SRC_FILES	=	get_next_line\
 				get_next_line_utils\
-				new_panel\
-				game_init\
 				utils\
+				game_init\
+				newpanel\
+				update\
 				tilemap\
 				main
 

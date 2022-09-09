@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/08 12:58:15 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/09 14:34:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 #include <memory.h>
 #include "get_next_line.h"
 #include "../so_long.h"
-
-void	*null_error(char *message)
-{
-	printf("\033[0;31m" " Error\n %s\n" "\033[0m", message);
-	return (0);
-}
 
 /* Return how many '\n' are in <file> */
 static int	file_linecount(char *file)
@@ -132,7 +126,7 @@ int	start(t_game *game, int argc, char **argv)
 		return (0);
 	game->og_collects = game->collects;
 	// anim_setup(game);
-	// game_init(game);
+	game_init(game);
 	return (1);
 }
 
@@ -146,4 +140,7 @@ int	main(int argc, char **argv)
 		printf("Too many args");
 	if (start(&game, argc, argv) == 0)
 		return (0);
+	mlx_loop_hook(game.mlx, update, (void * )&game);
+	mlx_loop(game.mlx);
+	return (0);
 }

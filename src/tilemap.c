@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:21:50 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/08 10:06:49 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/09 11:13:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	setup_tile(t_tile **tilemap, int x, int y)
 		tilemap[y][x].left = &tilemap[y][x - 1];
 	tilemap[y][x].right = &tilemap[y][x + 1];
 }
+
 /*Returns a tilemap according to the map*/
 t_tile	**generate_tilemap(char **map, t_game *game)
 {
