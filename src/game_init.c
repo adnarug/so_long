@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:24:18 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/09 15:05:26 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:22:07 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 void	open_walls(t_game *game)
 {
 	game->wall_imgs.block = mlx_xpm_file_to_image(game->mlx,
-			"sprites/wall1.xpm",
+			"sprites/wall.xpm",
 			&game->img_size.x, &game->img_size.y);
 	// game->wall_imgs.up_left = mlx_xpm_file_to_image(game->mlx,
 	// 		"/Users/pguranda/Projects/so_long_wip1/sprites/wall1.xpm",
@@ -47,30 +47,30 @@ void	open_walls(t_game *game)
 	// 		&game->img_size.x, &game->img_size.y);
 }
 
-//  void	open_player_imgs(t_game *game)
-// {
-// 	game->player.idle_img_0 = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/player_01.xpm", &game->img_size.x, &game->img_size.y);
-// 	game->player.idle_img_1 = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/player_02.xpm", &game->img_size.x, &game->img_size.y);
-// 	game->player.action_img = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/player_03.xpm", &game->img_size.x, &game->img_size.y);
-// 	game->player.current_img = game->player.action_img;
-// }
+ void	open_player_imgs(t_game *game)
+{
+	game->player.idle_img_0 = mlx_xpm_file_to_image(game->mlx,
+			"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
+	// game->player.idle_img_1 = mlx_xpm_file_to_image(game->mlx,
+	// 		"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
+	// game->player.action_img = mlx_xpm_file_to_image(game->mlx,
+	// 		"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
+	// game->player.current_img = game->player.action_img;
+}
 
-// void	open_collect_imgs(t_game *game)
-// {
-// 	game->collects_imgs.img_0 = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/plant_03.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// 	game->collects_imgs.img_1 = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/plant_04.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// 	game->collects_imgs.current_img = game->collects_imgs.img_0;
-// 	game->effect.img = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/effect_w.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// }
+void	open_collect_imgs(t_game *game)
+{
+	game->collects_imgs.img_0 = mlx_xpm_file_to_image(game->mlx,
+			"sprites/collect.xpm",
+			&game->img_size.x, &game->img_size.y);
+	// game->collects_imgs.img_1 = mlx_xpm_file_to_image(game->mlx,
+	// 		"sprites/plant_04.xpm",
+	// 		&game->img_size.x, &game->img_size.y);
+	// game->collects_imgs.current_img = game->collects_imgs.img_0;
+	// game->effect.img = mlx_xpm_file_to_image(game->mlx,
+	// 		"sprites/effect_w.xpm",
+	// 		&game->img_size.x, &game->img_size.y);
+}
 
 // void	open_enemy_imgs(t_game *game)
 // {
@@ -90,25 +90,25 @@ void	open_walls(t_game *game)
 // 	game->enemy_imgs.follow_current = game->enemy_imgs.follow_01;
 // }
 
-// static void	open_door_imgs(t_game *game)
-// {
-// 	game->door_open_img = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/door_01.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// 	game->door_close_img = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/door_02.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// }
+static void	open_door_imgs(t_game *game)
+{
+	game->door_open_img = mlx_xpm_file_to_image(game->mlx,
+			"sprites/exit_close.xpm",
+			&game->img_size.x, &game->img_size.y);
+	game->door_close_img = mlx_xpm_file_to_image(game->mlx,
+			"sprites/exit_close.xpm",
+			&game->img_size.x, &game->img_size.y);
+}
 
 /* Opens with the mlx all images needed in the game */
 void	open_images(t_game *game)
 {
 	open_walls(game);
 	// open_wallimgs_down (game);
-	// open_player_imgs(game);
-	// open_collect_imgs(game);
+	open_player_imgs(game);
+	open_collect_imgs(game);
 	// open_enemy_imgs(game);
-	// open_door_imgs(game);
+	open_door_imgs(game);
 }
 
 /* Returns a t_color struct */
