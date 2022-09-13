@@ -203,6 +203,8 @@ void	color_panel(t_panel *panel, t_color color);
 void	*new_panel(t_game *game, t_color color);
 void	render(t_game game);
 int		update(t_game *game);
+t_bool  move_to(t_game *game, t_tile *tile);
+int	input(int key, t_game *game);
 
 
 #endif

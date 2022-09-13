@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/09 14:34:52 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:47:12 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,8 @@ int	main(int argc, char **argv)
 		printf("Too many args");
 	if (start(&game, argc, argv) == 0)
 		return (0);
-	mlx_loop_hook(game.mlx, update, (void * )&game);
+	mlx_hook(game.window, 2, 0, input, (void*)&game);
+	mlx_loop_hook(game.mlx, update, (void*)&game);
 	mlx_loop(game.mlx);
 	return (0);
 }

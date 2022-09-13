@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 13:42:25 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/10 16:19:08 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:38:50 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static void	draw_image(t_tile tile, t_game game, t_vector pos)
 		draw_wall(tile, game, pos);
 	else if (tile.type == EXIT)
 	{
-		if (game.collects != 0)
+		// if (game.collects != 0)
 			mlx_put_image_to_window(game.mlx, game.window,
 			game.door_open_img, pos.x, pos.y);
-		if (game.collects == 0)
-			mlx_put_image_to_window(game.mlx, game.window, game.door_close_img, pos.x, pos.y);
+		// if (game.collects == 0)
+		// 	mlx_put_image_to_window(game.mlx, game.window, game.door_close_img, pos.x, pos.y);
 	}
 	else if (tile.type == COLLECTABLE)
 		mlx_put_image_to_window(game.mlx, game.window, game.collects_imgs.current_img, pos.x, pos.y);

@@ -18,6 +18,7 @@ SRC_FILES	=	get_next_line\
 				newpanel\
 				update\
 				tilemap\
+				input\
 				main
 
 SRC		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

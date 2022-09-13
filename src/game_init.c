@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:24:18 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/10 16:22:07 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:57:31 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	open_walls(t_game *game)
 
  void	open_player_imgs(t_game *game)
 {
-	game->player.idle_img_0 = mlx_xpm_file_to_image(game->mlx,
-			"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
+	// game->player.idle_img_0 = mlx_xpm_file_to_image(game->mlx,
+	// 		"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
 	// game->player.idle_img_1 = mlx_xpm_file_to_image(game->mlx,
 	// 		"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
-	// game->player.action_img = mlx_xpm_file_to_image(game->mlx,
-	// 		"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
-	// game->player.current_img = game->player.action_img;
+	game->player.action_img = mlx_xpm_file_to_image(game->mlx,
+			"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
+	game->player.current_img = game->player.action_img;
 }
 
 void	open_collect_imgs(t_game *game)
@@ -66,7 +66,7 @@ void	open_collect_imgs(t_game *game)
 	// game->collects_imgs.img_1 = mlx_xpm_file_to_image(game->mlx,
 	// 		"sprites/plant_04.xpm",
 	// 		&game->img_size.x, &game->img_size.y);
-	// game->collects_imgs.current_img = game->collects_imgs.img_0;
+	game->collects_imgs.current_img = game->collects_imgs.img_0;
 	// game->effect.img = mlx_xpm_file_to_image(game->mlx,
 	// 		"sprites/effect_w.xpm",
 	// 		&game->img_size.x, &game->img_size.y);
@@ -165,7 +165,7 @@ void	game_init(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx,
-			game->wndw_size.x + IMG_SIZE / 2,
+			game->wndw_size.x /*+ IMG_SIZE/2*/,
 			game->wndw_size.y,
 			"so_long");
 	mlx_hook(game->window, 17, 0, end_program, game);
