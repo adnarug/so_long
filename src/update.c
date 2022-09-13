@@ -6,13 +6,41 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 13:42:25 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/13 15:20:36 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:58:50 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 /*Caclucate all animations and render*/
+
+/* If the effect counter is less than its animation frames, draws it */
+static void	draw_effect(t_game game)
+{
+	if (game.effect.counter < game.effect.frames)
+		mlx_put_image_to_window(game.mlx, game.window,
+			game.effect.img,
+			game.effect.pos.x, game.effect.pos.y);
+}
+
+static void	player_animation(t_player *player)
+{
+	if (player->current_img == player->action_img
+		&& player->framecount >= player->action_frames)
+	{
+		player->current_img = player->idle_img_1;
+	}
+	else if (player->framecount == player->idle_frames)
+	{
+		player->current_img = player->idle_img_0;
+	}
+	else if (player->framecount >= player->idle_frames * 2)
+	{
+		player->current_img = player->idle_img_1;
+		player->framecount = 0;
+	}
+	player->framecount += 1;
+}
 
 /* Draws the corresponding sprite for the wall at <pos> */
 void	draw_wall(t_tile tile, t_game game, t_vector pos)
@@ -43,10 +71,8 @@ static void	draw_image(t_tile tile, t_game game, t_vector pos)
 	else if (tile.type == PLAYER)
 		mlx_put_image_to_window(game.mlx, game.window,
 		game.player.current_img, pos.x, pos.y);
-	// else if (tile.type == ENEMY)
-	// 	mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_current, pos.x, pos.y);
-	// else if (tile.type == FOLLOWER)
-	// 	mlx_put_image_to_window(game.mlx, game.window, game_imgs.follow_current, pos.x, pos.y);
+	else if (tile.type == ENEMY)
+		mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_current, pos.x, pos.y);
 }
 
 void	draw_text(t_game game)
@@ -72,7 +98,7 @@ void	render(t_game game)
 		{
 			tile = game.tilemap[y][x];
 			draw_image(tile, game, tile.position);
-			// draw_effect(game);
+			draw_effect(game);
 			x++;
 		}
 		y++;
@@ -82,6 +108,7 @@ void	render(t_game game)
 
 int	update(t_game *game)
 {
+	player_animation(&game->player);
 	render(*game);
 	return(1);
 }

@@ -6,11 +6,12 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:21:50 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/09 11:13:52 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:24:50 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+ 
 /* Allocates memory to save a tilemap with same size as <map> */
 t_tile	**alloc_tilemap(char **map)
 {
@@ -60,8 +61,8 @@ void	set_gamevars(t_tile *tile, t_game *game, char c)
 		game->player.tile = tile;
 	else if (tile->type == COLLECTABLE)
 		game->collects++;
-	// else if (tile->type == ENEMY || tile->type == FOLLOWER)
-	// 	add_enemy(gamme, c,, title);
+	// else if (tile->type == ENEMY)
+	// 	add_enemy(game, c,, title);
 }
 
 /* Set the size, original type and neighboors of the <x><y> tile of <tilemap> */

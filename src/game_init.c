@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:24:18 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/13 11:57:31 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:51:04 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	open_walls(t_game *game)
 
  void	open_player_imgs(t_game *game)
 {
-	// game->player.idle_img_0 = mlx_xpm_file_to_image(game->mlx,
-	// 		"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
-	// game->player.idle_img_1 = mlx_xpm_file_to_image(game->mlx,
-	// 		"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
+	game->player.idle_img_0 = mlx_xpm_file_to_image(game->mlx,
+			"sprites/player_idle_1.xpm", &game->img_size.x, &game->img_size.y);
+	game->player.idle_img_1 = mlx_xpm_file_to_image(game->mlx,
+			"sprites/player_idle_2.xpm", &game->img_size.x, &game->img_size.y);
 	game->player.action_img = mlx_xpm_file_to_image(game->mlx,
 			"sprites/player.xpm", &game->img_size.x, &game->img_size.y);
 	game->player.current_img = game->player.action_img;
@@ -72,23 +72,23 @@ void	open_collect_imgs(t_game *game)
 	// 		&game->img_size.x, &game->img_size.y);
 }
 
-// void	open_enemy_imgs(t_game *game)
-// {
-// 	game->enemy_imgs.basic_01 = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/enemy_01.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// 	game->enemy_imgs.basic_02 = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/enemy_02.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// 	game->enemy_imgs.basic_current = game->enemy_imgs.basic_01;
-// 	game->enemy_imgs.follow_01 = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/enemy_03.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// 	game->enemy_imgs.follow_02 = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/enemy_04.xpm",
-// 			&game->img_size.x, &game->img_size.y);
-// 	game->enemy_imgs.follow_current = game->enemy_imgs.follow_01;
-// }
+void	open_enemy_imgs(t_game *game)
+{
+	game->enemy_imgs.basic_01 = mlx_xpm_file_to_image(game->mlx,
+			"sprites/monster_start.xpm",
+			&game->img_size.x, &game->img_size.y);
+	// game->enemy_imgs.basic_02 = mlx_xpm_file_to_image(game->mlx,
+	// 		"sprites/enemy_02.xpm",
+	// 		&game->img_size.x, &game->img_size.y);
+	// game->enemy_imgs.basic_current = game->enemy_imgs.basic_01;
+	// game->enemy_imgs.follow_01 = mlx_xpm_file_to_image(game->mlx,
+	// 		"sprites/enemy_03.xpm",
+	// 		&game->img_size.x, &game->img_size.y);
+	// game->enemy_imgs.follow_02 = mlx_xpm_file_to_image(game->mlx,
+	// 		"sprites/enemy_04.xpm",
+	// 		&game->img_size.x, &game->img_size.y);
+	game->enemy_imgs.follow_current = game->enemy_imgs.basic_01;
+}
 
 static void	open_door_imgs(t_game *game)
 {
@@ -107,7 +107,7 @@ void	open_images(t_game *game)
 	// open_wallimgs_down (game);
 	open_player_imgs(game);
 	open_collect_imgs(game);
-	// open_enemy_imgs(game);
+	open_enemy_imgs(game);
 	open_door_imgs(game);
 }
 

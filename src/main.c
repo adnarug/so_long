@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/13 13:47:12 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:22:07 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	anim_setup(t_game *game)
 	game->collects_imgs.anim_frames = 25;
 	game->effect.frames = 7;
 	game->enemy_imgs.basic_anim = 16;
-	game->enemy_imgs.follow_anim = 6;
 }
 
 int	start(t_game *game, int argc, char **argv)
@@ -125,7 +124,7 @@ int	start(t_game *game, int argc, char **argv)
 	if (game->tilemap == NULL)
 		return (0);
 	game->og_collects = game->collects;
-	// anim_setup(game);
+	anim_setup(game);
 	game_init(game);
 	return (1);
 }

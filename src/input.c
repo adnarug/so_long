@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:01:58 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/13 13:53:24 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:46:59 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ int	input(int key, t_game *game)
 	
 	if (key == ESC)
 		end_program(game);
-	// else if(key == RESET)
-	// 	return (rest(game));
 	if (game->player.tile == NULL)
 		return (0);
 	if (key == KEY_UP)
@@ -87,6 +85,6 @@ int	input(int key, t_game *game)
 	else
 		return (0);
 	if  (moved != FALSE )
-		printf("Moves -> %02d\n", game->moves++);
+		ft_printf("Moves -> %02d\n", game->moves++);
 	return (1);
 }
