@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pguranda <pguranda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 10:45:34 by pguranda          #+#    #+#             */
-/*   Updated: 2022/06/22 17:08:08 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:15:34 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*read_until_nl(int fd, char *unsorted_line)
 	new_line = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (new_line == NULL)
 		return (NULL);
-	while ((ft_strchr(unsorted_line, '\n') == 0) && read_result > 0)
+	while ((ft_special_strchr(unsorted_line, '\n') == 0) && read_result > 0)
 	{
 		read_result = read(fd, new_line, BUFFER_SIZE);
 		if (read_result == -1)

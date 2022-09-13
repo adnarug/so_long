@@ -7,7 +7,7 @@
 # include <fcntl.h>
 # include <string.h>//to be deleted
 # include <unistd.h>
-
+# include "./Printf/ft_printf.h"
 # define IMG_SIZE 64
 
 typedef enum e_bool

@@ -5,6 +5,7 @@ CC		:= cc
 LIBS	:= $(LIBMLX)/libmlx.a -framework Cocoa -framework OpenGL -framework IOKit
 OBJ_DIR	:= objs/
 SRC_DIR	:= src/
+PRINTF	:= Printf/
 #SRC_FILES	:= $(shell find ./src -iname "*.c")
 AR		:= ar rcs
 
@@ -32,8 +33,9 @@ libmlx:
 OBJF	=	.cache_exists
 
 $(NAME)	:	$(OBJ)
+	@$(MAKE) -C Printf/
 	@$(AR) $(NAME) $(OBJ)
-	@$(CC) $(LIBS) so_long.a -o so_long
+	@$(CC) $(LIBS) Printf/libftprintf.a so_long.a -o so_long
 	@echo "$(GREEN)so_long compiled!$(DEF_COLOR)"
 
 $(OBJF):
@@ -44,12 +46,14 @@ $(OBJ_DIR)%.o	:	$(SRC_DIR)%.c | $(OBJF)
 
 clean:
 	@rm -r $(OBJ_DIR)
+	@make clean -C $(PRINTF)
 	@$(MAKE) -C $(LIBMLX) clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f ./libmlx.a 
 	@rm -rf so_long
+	@rm -rf $(PRINTF)/libft/libft.a
 	@$(MAKE) -C $(LIBMLX) clean
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 13:42:25 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/13 11:38:50 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:20:36 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ static void	draw_image(t_tile tile, t_game game, t_vector pos)
 	// 	mlx_put_image_to_window(game.mlx, game.window, game_imgs.follow_current, pos.x, pos.y);
 }
 
+void	draw_text(t_game game)
+{
+			mlx_string_put(game.mlx, game.window,
+			game.wndw_size.x - IMG_SIZE / 2.3,
+			IMG_SIZE - IMG_SIZE / 1.5,
+			15921152, ft_itoa(game.moves));
+}
+
 void	render(t_game game)
 {
 	t_tile	tile;
@@ -69,7 +77,7 @@ void	render(t_game game)
 		}
 		y++;
 	}
-	// draw_text(game);
+	draw_text(game);
 }
 
 int	update(t_game *game)
