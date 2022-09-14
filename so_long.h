@@ -106,7 +106,6 @@ typedef enum e_enemytype
 {
 	HORIZONTAL_ENEM = 'H',
 	VERTICAL_ENEM = 'V',
-	FOLLOW_ENEM = 'F'
 }	t_enemyytpe;
 
 /* Enemies animation info */
@@ -114,12 +113,9 @@ typedef struct s_enemy_imgs
 {
 	int		basic_anim;
 	void	*basic_current;
-	void	*basic_01;
-	void	*basic_02;
-	int		follow_anim;
-	void	*follow_current;
-	void	*follow_01;
-	void	*follow_02;
+	void	*basic_up;
+	void	*basic_low;
+	void	*basic_mid;
 }	t_enemy_img;
 
 /* Struct to make a list of enemies */
@@ -208,7 +204,10 @@ int	input(int key, t_game *game);
 t_enemy	*new_enemy(t_enemyytpe type, t_tile *tile);
 t_enemy	*last_enemy(t_enemy *list);
 void	add_enemy(t_game *game, t_enemyytpe type, t_tile *tile);
-
-
+void	move_enemies(t_game *game);
+t_bool	move_ver(t_enemy *enemy, t_game *game);
+t_bool	move_hor(t_enemy *enemy, t_game *game);
+void	enemy_animation(t_enemy_img *img);
+void	kill_player(t_game *game, t_vector pos);
 
 #endif

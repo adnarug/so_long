@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 13:42:25 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/13 17:58:50 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:26:23 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	render(t_game game)
 int	update(t_game *game)
 {
 	player_animation(&game->player);
+	enemy_animation(&game->enemy_imgs);
 	render(*game);
 	return(1);
 }

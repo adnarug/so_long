@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:21:50 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/14 13:21:48 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:41:29 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_tile	**generate_tilemap(char **map, t_game *game)
 	if (tilemap == NULL)
 		return (NULL);
 	y = 0;
+	game->enemy_list = NULL;
 	while (map[y] != NULL)
 	{
 		x = 0;
