@@ -205,6 +205,10 @@ void	render(t_game game);
 int		update(t_game *game);
 t_bool  move_to(t_game *game, t_tile *tile);
 int	input(int key, t_game *game);
+t_enemy	*new_enemy(t_enemyytpe type, t_tile *tile);
+t_enemy	*last_enemy(t_enemy *list);
+void	add_enemy(t_game *game, t_enemyytpe type, t_tile *tile);
+
 
 
 #endif

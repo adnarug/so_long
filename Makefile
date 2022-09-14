@@ -20,6 +20,7 @@ SRC_FILES	=	get_next_line\
 				update\
 				tilemap\
 				input\
+				enemy\
 				main
 
 SRC		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:21:50 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/13 17:24:50 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/14 13:21:48 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ t_tiletype	define_tiletype(char definer)
 		return (PLAYER);
 	if (definer == 'E')
 		return (EXIT);
-	if (definer == 'H' || definer == 'V')
+	else if (definer == 'H' || definer == 'V')
 		return (ENEMY);
-	else if (definer == 'F')
-		return (FOLLOWER);
 	return (EMPTY);
 }
 
@@ -61,8 +59,8 @@ void	set_gamevars(t_tile *tile, t_game *game, char c)
 		game->player.tile = tile;
 	else if (tile->type == COLLECTABLE)
 		game->collects++;
-	// else if (tile->type == ENEMY)
-	// 	add_enemy(game, c,, title);
+	else if (tile->type == ENEMY)
+		add_enemy(game, c, tile);
 }
 
 /* Set the size, original type and neighboors of the <x><y> tile of <tilemap> */
@@ -106,6 +104,6 @@ t_tile	**generate_tilemap(char **map, t_game *game)
 	}
 	tilemap[y] = NULL;
 	game->wndw_size.x = x * IMG_SIZE;
-	game->wndw_size.y = y * IMG_SIZE;
+		game->wndw_size.y = y * IMG_SIZE;
 	return (tilemap);
 }
