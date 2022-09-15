@@ -6,27 +6,26 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:52:03 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/14 14:46:44 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:22:48 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 
-void	enemy_animation(t_enemy_img *img)
-{
-	static int	basic_count;
-	static int	follower_count;
+// void	enemy_animation(t_enemy_img *img)
+// {
+// 	static int	basic_count;
 
-	if (basic_count == img->basic_anim)
-		img->basic_current = img->basic_up;
-	else if (basic_count > img->basic_anim * 2)
-	{
-		img->basic_current = img->basic_low;
-		basic_count = 0;
-	}
-	basic_count++;
-}
+// 	if (basic_count == img->basic_anim)
+// 		img->basic_current = img->basic_up;
+// 	else if (basic_count > img->basic_anim * 2)
+// 	{
+// 		img->basic_current = img->basic_low;
+// 		basic_count = 0;
+// 	}
+// 	basic_count++;
+// }
 
 /* Change the tile of <enemy> */
 void	move_enemy_to(t_enemy *enemy, t_tile *tile)

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 13:42:25 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/14 14:26:23 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:27:23 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,32 @@
 /*Caclucate all animations and render*/
 
 /* If the effect counter is less than its animation frames, draws it */
-static void	draw_effect(t_game game)
-{
-	if (game.effect.counter < game.effect.frames)
-		mlx_put_image_to_window(game.mlx, game.window,
-			game.effect.img,
-			game.effect.pos.x, game.effect.pos.y);
-}
+// static void	draw_effect(t_game game)
+// {
+// 	if (game.effect.counter < game.effect.frames)
+// 		mlx_put_image_to_window(game.mlx, game.window,
+// 			game.effect.img,
+// 			game.effect.pos.x, game.effect.pos.y);
+// }
 
-static void	player_animation(t_player *player)
-{
-	if (player->current_img == player->action_img
-		&& player->framecount >= player->action_frames)
-	{
-		player->current_img = player->idle_img_1;
-	}
-	else if (player->framecount == player->idle_frames)
-	{
-		player->current_img = player->idle_img_0;
-	}
-	else if (player->framecount >= player->idle_frames * 2)
-	{
-		player->current_img = player->idle_img_1;
-		player->framecount = 0;
-	}
-	player->framecount += 1;
-}
+// static void	player_animation(t_player *player)
+// {
+// 	if (player->current_img == player->action_img
+// 		&& player->framecount >= player->action_frames)
+// 	{
+// 		player->current_img = player->idle_img_1;
+// 	}
+// 	else if (player->framecount == player->idle_frames)
+// 	{
+// 		player->current_img = player->idle_img_0;
+// 	}
+// 	else if (player->framecount >= player->idle_frames * 2)
+// 	{
+// 		player->current_img = player->idle_img_1;
+// 		player->framecount = 0;
+// 	}
+// 	player->framecount += 1;
+// }
 
 /* Draws the corresponding sprite for the wall at <pos> */
 void	draw_wall(t_tile tile, t_game game, t_vector pos)
@@ -54,8 +54,12 @@ void	draw_wall(t_tile tile, t_game game, t_vector pos)
 }
 
 /*Drawing the corresponding image to the tile type*/
-static void	draw_image(t_tile tile, t_game game, t_vector pos)
+void	draw_image(t_tile tile, t_game game, t_vector pos, int *frame)
 {
+	*frame = *frame + 1;
+	if (*frame == 100)
+		*frame = 0;
+	printf("%d ", *frame);
 	if (tile.type == WALL)
 		draw_wall(tile, game, pos);
 	else if (tile.type == EXIT)
@@ -72,8 +76,35 @@ static void	draw_image(t_tile tile, t_game game, t_vector pos)
 		mlx_put_image_to_window(game.mlx, game.window,
 		game.player.current_img, pos.x, pos.y);
 	else if (tile.type == ENEMY)
-		mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_current, pos.x, pos.y);
+	{
+		if (*frame < 50)
+			mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_mid, pos.x, pos.y);
+		else
+			mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_up, pos.x, pos.y);
+	}
 }
+
+// void	draw_image(t_tile tile, t_game game, t_vector pos)
+// {
+// 	if (tile.type == WALL)
+// 		draw_wall(tile, game, pos);
+// 	else if (tile.type == EXIT)
+// 	{
+// 		// if (game.collects != 0)
+// 			mlx_put_image_to_window(game.mlx, game.window,
+// 			game.door_open_img, pos.x, pos.y);
+// 		// if (game.collects == 0)
+// 		// 	mlx_put_image_to_window(game.mlx, game.window, game.door_close_img, pos.x, pos.y);
+// 	}
+// 	else if (tile.type == COLLECTABLE)
+// 		mlx_put_image_to_window(game.mlx, game.window, game.collects_imgs.current_img, pos.x, pos.y);
+// 	else if (tile.type == PLAYER)
+// 		mlx_put_image_to_window(game.mlx, game.window,
+// 		game.player.current_img, pos.x, pos.y);
+// 	else if (tile.type == ENEMY)
+// 		mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_low, pos.x, pos.y);
+// }
+
 
 void	draw_text(t_game game)
 {
@@ -88,17 +119,20 @@ void	render(t_game game)
 	t_tile	tile;
 	int		x;
 	int		y;
+	int		frame;
 
 	mlx_clear_window(game.mlx, game.window);
 	y = 0;
+	frame = 0;
 	while (game.tilemap[y] != NULL)
 	{
 		x = 0;
 		while (game.tilemap[y][x].type != 0)
 		{
 			tile = game.tilemap[y][x];
-			draw_image(tile, game, tile.position);
-			draw_effect(game);
+			draw_image(tile, game, tile.position, &frame);
+			//draw_image2(tile, game, tile.position);
+			// draw_effect(game);
 			x++;
 		}
 		y++;
@@ -108,8 +142,8 @@ void	render(t_game game)
 
 int	update(t_game *game)
 {
-	player_animation(&game->player);
-	enemy_animation(&game->enemy_imgs);
+	// player_animation(&game->player);
+	// enemy_animation(&game->enemy_imgs);
 	render(*game);
 	return(1);
 }

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:24:18 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/14 13:49:49 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:30:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // 			"sprites/wall.xpm",
 // 			&game->img_size.x, &game->img_size.y);
 // 	game->wall_imgs.down = mlx_xpm_file_to_image(game->mlx,
-// 			"sprites/wall.xpm",
+// 			"sprites/wall.xpm", 
 // 			&game->img_size.x, &game->img_size.y);
 // 	game->wall_imgs.down_left = mlx_xpm_file_to_image(game->mlx,
 // 			"sprites/wall.xpm",
