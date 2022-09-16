@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:21:50 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/15 17:04:55 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/16 09:54:09 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	set_gamevars(t_tile *tile, t_game *game, char c)
 		add_enemy(game, c, tile);
 }
 
-/* Set the size, original type and neighboors of the <x><y> tile of <tilemap> */
+/* Set the size, original type and neighboors of the <x><y> tile of <tilemap>  */
 void	setup_tile(t_tile **tilemap, int x, int y)
 {
 	tilemap[y][x].og_type = tilemap[y][x].type;

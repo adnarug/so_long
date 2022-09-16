@@ -6,22 +6,28 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 13:42:25 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/15 17:27:23 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:14:20 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 /*Caclucate all animations and render*/
+/* Places and starts the "particles" effect */
+void	effect_anim(t_effect *effect, t_vector pos)
+{
+	effect->counter = 0;
+	effect->pos = pos;
+}
 
 /* If the effect counter is less than its animation frames, draws it */
-// static void	draw_effect(t_game game)
-// {
-// 	if (game.effect.counter < game.effect.frames)
-// 		mlx_put_image_to_window(game.mlx, game.window,
-// 			game.effect.img,
-// 			game.effect.pos.x, game.effect.pos.y);
-// }
+static void	draw_effect(t_game game)
+{
+	if (game.effect.counter < game.effect.frames)
+		mlx_put_image_to_window(game.mlx, game.window,
+			game.effect.img,
+			game.effect.pos.x, game.effect.pos.y);
+}
 
 // static void	player_animation(t_player *player)
 // {
@@ -59,7 +65,7 @@ void	draw_image(t_tile tile, t_game game, t_vector pos, int *frame)
 	*frame = *frame + 1;
 	if (*frame == 100)
 		*frame = 0;
-	printf("%d ", *frame);
+	// printf("%d ", *frame);
 	if (tile.type == WALL)
 		draw_wall(tile, game, pos);
 	else if (tile.type == EXIT)
@@ -80,7 +86,7 @@ void	draw_image(t_tile tile, t_game game, t_vector pos, int *frame)
 		if (*frame < 50)
 			mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_mid, pos.x, pos.y);
 		else
-			mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_up, pos.x, pos.y);
+			mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_current, pos.x, pos.y);
 	}
 }
 
@@ -131,7 +137,6 @@ void	render(t_game game)
 		{
 			tile = game.tilemap[y][x];
 			draw_image(tile, game, tile.position, &frame);
-			//draw_image2(tile, game, tile.position);
 			// draw_effect(game);
 			x++;
 		}
@@ -143,7 +148,7 @@ void	render(t_game game)
 int	update(t_game *game)
 {
 	// player_animation(&game->player);
-	// enemy_animation(&game->enemy_imgs);
+	enemy_animation(&game->enemy_imgs);
 	render(*game);
 	return(1);
 }

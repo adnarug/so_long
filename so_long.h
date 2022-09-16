@@ -52,14 +52,6 @@ typedef struct s_tile
 typedef struct s_wall_img
 {
 	void	*block;
-	void	*up_left;
-	void	*up;
-	void	*up_right;
-	void	*right;
-	void	*down_right;
-	void	*down;
-	void	*down_left;
-	void	*left;
 }	t_wall_img;
 
 /* Collectables animation info */
@@ -209,5 +201,6 @@ t_bool	move_ver(t_enemy *enemy, t_game *game);
 t_bool	move_hor(t_enemy *enemy, t_game *game);
 void	enemy_animation(t_enemy_img *img);
 void	kill_player(t_game *game, t_vector pos);
+void	effect_anim(t_effect *effect, t_vector pos);
 
 #endif

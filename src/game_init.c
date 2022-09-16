@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:24:18 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/15 17:30:52 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:44:32 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	open_collect_imgs(t_game *game)
 	// 		"sprites/plant_04.xpm",
 	// 		&game->img_size.x, &game->img_size.y);
 	game->collects_imgs.current_img = game->collects_imgs.img_0;
-	// game->effect.img = mlx_xpm_file_to_image(game->mlx,
-	// 		"sprites/effect_w.xpm",
-	// 		&game->img_size.x, &game->img_size.y);
+	game->effect.img = mlx_xpm_file_to_image(game->mlx,
+	 		"sprites/effect_w.xpm",
+			&game->img_size.x, &game->img_size.y);
 }
 
 void	open_enemy_imgs(t_game *game)
