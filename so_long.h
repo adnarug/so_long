@@ -169,14 +169,14 @@ typedef struct s_game
 	void			*white_panel;
 }	t_game;
 
-typedef struct s_mapcheckerdata
+typedef struct s_map_data_checker
 {
-	t_vector	size;
-	t_vector	point;
-	t_bool		b_player;
-	t_bool		b_exit;
-	t_bool		b_collect;
-}				t_mapcheckerdata;
+	t_vector		size;
+	t_vector		curs;
+	t_bool			one_P;
+	t_bool			one_E;
+	t_bool			at_least_one_C;
+}	t_map_data_checker;
 
 void	game_init(t_game *game);
 int		end_program(t_game *game);
@@ -201,5 +201,6 @@ t_bool	move_ver(t_enemy *enemy, t_game *game);
 t_bool	move_hor(t_enemy *enemy, t_game *game);
 void	enemy_animation(t_enemy_img *img);
 void	kill_player(t_game *game, t_vector pos);
+void	valid_map(char **map);
 
 #endif

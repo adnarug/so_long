@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/16 10:42:18 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:11:54 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,58 @@ char	**read_map(char *file)
 	return (map);
 }
 
+/*Checks the validity of the map*/
+
+void valid_map(char**map)
+{
+	int	x;
+	int	y;
+	
+	x = 0;
+	y = 0;
+	// while (map[0][x] == 1)
+	// {
+	// 	x++;
+	// 	if (map[0][x] != 1)
+	// 	{
+	// 		error("The map is not valid");
+	// 		exit(0);
+	// 	}
+	// }
+	
+	while (map[0][x] != '\n')
+	{
+		if (map[0][x] != '1')
+		{
+			error("The map is not valid");
+			exit(0);
+		}
+		x++;
+	}
+	// while (map[y][x - 1] != '\n')
+	// {
+	// 	if (map[y][x - 1] != '1')
+	// 	{
+	// 		error("The map is not valid");
+	// 		exit(0);
+	// 	}
+	// 	y++;
+	// }
+	// y = 0;
+	while (map[y][0] == '1')
+	{
+		y++;
+		if (map[y][0] != '1')
+		{
+			error("The map is not valid");
+			exit(0);
+		}
+	}
+	//Check the walls - rows and collumns of 1
+	//Check if there are walls going through 
+
+}
+
 /* Creates -with malloc- a tilemap acording to the
 first file of argv. Returns NULL if an error occurs. */
 t_tile	**map_init(int argc, char **argv, t_game *game)
@@ -96,10 +148,10 @@ t_tile	**map_init(int argc, char **argv, t_game *game)
 
 	// if (!valid_file(argc, argv[1]))
 	// 	return (NULL);
+	// if (map == NULL)
+	// 	return (NULL);
 	map = read_map(argv[1]);
-	if (map == NULL)
-		return (NULL);
-	//checking the validity of the map
+	// valid_map(map);
 	tilemap = generate_tilemap(map, game);
 	ft_free_chartable(map);
 	if (tilemap == NULL)
