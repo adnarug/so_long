@@ -201,6 +201,5 @@ t_bool	move_ver(t_enemy *enemy, t_game *game);
 t_bool	move_hor(t_enemy *enemy, t_game *game);
 void	enemy_animation(t_enemy_img *img);
 void	kill_player(t_game *game, t_vector pos);
-void	effect_anim(t_effect *effect, t_vector pos);
 
 #endif

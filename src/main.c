@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/16 08:36:55 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:42:18 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ t_tile	**map_init(int argc, char **argv, t_game *game)
 
 void	anim_setup(t_game *game)
 {
-// 	game->player.idle_frames = 17;
-// 	game->player.action_frames = 10;
+ 	game->player.idle_frames = 17;
+	game->player.action_frames = 10;
 // 	game->collects_imgs.anim_frames = 25;
 	game->effect.frames = 7;
 	game->enemy_imgs.basic_anim = 16;

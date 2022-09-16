@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:01:58 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/16 10:02:12 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:51:44 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	kill_player(t_game *game, t_vector pos)
 {
 	game->player.tile = NULL;
-	effect_anim(&game->effect, pos);
+	printf("You lost!");
+	end_program(game);
+	// effect_anim(&game->effect, pos);
 	// mlx_put_image_to_window(game->mlx, game->window, game->red_panel, 0, 0);
 }
 

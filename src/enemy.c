@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:52:03 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/16 10:28:16 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:45:28 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	enemy_animation(t_enemy_img *img)
 	static int	basic_count;
 
 	if (basic_count == img->basic_anim)
-		img->basic_current = img->basic_up;
+		img->basic_current = img->basic_low;
 	else if (basic_count > img->basic_anim * 2)
 	{
 		img->basic_current = img->basic_mid;

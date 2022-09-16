@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 13:42:25 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/16 10:14:20 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:43:40 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,39 @@
 
 /*Caclucate all animations and render*/
 /* Places and starts the "particles" effect */
-void	effect_anim(t_effect *effect, t_vector pos)
-{
-	effect->counter = 0;
-	effect->pos = pos;
-}
-
-/* If the effect counter is less than its animation frames, draws it */
-static void	draw_effect(t_game game)
-{
-	if (game.effect.counter < game.effect.frames)
-		mlx_put_image_to_window(game.mlx, game.window,
-			game.effect.img,
-			game.effect.pos.x, game.effect.pos.y);
-}
-
-// static void	player_animation(t_player *player)
+// void	effect_anim(t_effect *effect, t_vector pos)
 // {
-// 	if (player->current_img == player->action_img
-// 		&& player->framecount >= player->action_frames)
-// 	{
-// 		player->current_img = player->idle_img_1;
-// 	}
-// 	else if (player->framecount == player->idle_frames)
-// 	{
-// 		player->current_img = player->idle_img_0;
-// 	}
-// 	else if (player->framecount >= player->idle_frames * 2)
-// 	{
-// 		player->current_img = player->idle_img_1;
-// 		player->framecount = 0;
-// 	}
-// 	player->framecount += 1;
+// 	effect->counter = 0;
+// 	effect->pos = pos;
 // }
+
+// /* If the effect counter is less than its animation frames, draws it */
+// static void	draw_effect(t_game game)
+// {
+// 	if (game.effect.counter < game.effect.frames)
+// 		mlx_put_image_to_window(game.mlx, game.window,
+// 			game.effect.img,
+// 			game.effect.pos.x, game.effect.pos.y);
+// }
+
+static void	player_animation(t_player *player)
+{
+	if (player->current_img == player->action_img
+		&& player->framecount >= player->action_frames)
+	{
+		player->current_img = player->idle_img_1;
+	}
+	else if (player->framecount == player->idle_frames)
+	{
+		player->current_img = player->idle_img_0;
+	}
+	else if (player->framecount >= player->idle_frames * 2)
+	{
+		player->current_img = player->idle_img_1;
+		player->framecount = 0;
+	}
+	player->framecount += 1;
+}
 
 /* Draws the corresponding sprite for the wall at <pos> */
 void	draw_wall(t_tile tile, t_game game, t_vector pos)
@@ -83,9 +83,9 @@ void	draw_image(t_tile tile, t_game game, t_vector pos, int *frame)
 		game.player.current_img, pos.x, pos.y);
 	else if (tile.type == ENEMY)
 	{
-		if (*frame < 50)
-			mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_mid, pos.x, pos.y);
-		else
+		// if (*frame < 50)
+		// 	mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_mid, pos.x, pos.y);
+		// else
 			mlx_put_image_to_window(game.mlx, game.window, game.enemy_imgs.basic_current, pos.x, pos.y);
 	}
 }
@@ -147,7 +147,7 @@ void	render(t_game game)
 
 int	update(t_game *game)
 {
-	// player_animation(&game->player);
+	player_animation(&game->player);
 	enemy_animation(&game->enemy_imgs);
 	render(*game);
 	return(1);
