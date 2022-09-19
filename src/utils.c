@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:46:44 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/14 15:04:10 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/19 10:20:39 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,14 @@ void	ft_free_chartable(char **table)
 		i++;
 	}
 	free(table);
+}
+
+int	ft_strlen_nl(const char *c)
+{
+	size_t				i;
+
+	i = 0;
+	while (c[i] != '\0' && c[i] != '\n')
+		i++;
+	return (i);
 }

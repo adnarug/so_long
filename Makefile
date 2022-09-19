@@ -21,6 +21,8 @@ SRC_FILES	=	get_next_line\
 				tilemap\
 				input\
 				enemy\
+				map_validity_checker\
+				map_validity_tiles\
 				main
 
 SRC		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

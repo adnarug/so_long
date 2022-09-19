@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/16 12:11:54 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:10:52 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static char	**alloc_columns(char *file, int *line_count)
 	char	**map;
 
 	*line_count = file_linecount(file);
+	printf("low level linecount : %d", *line_count);
 	if (*line_count <= 0)
 		return (null_error("open or reading error, the file may not exist"));
 	map = malloc(sizeof(char *) * *line_count + 1);
@@ -61,82 +62,28 @@ static char	**alloc_columns(char *file, int *line_count)
 }
 
 /* Creates -with malloc- a 2D char map as found in file */
-char	**read_map(char *file)
+char	**read_map(char *file, int *line_count)
 {
 	char	**map;
 	int		fd;
-	int		line_count;
 	int		i;
+	int		num_lines;
 
 	i = 0;
-	line_count = 0;
-	map = alloc_columns(file, &line_count);
-	// printf("Line count: %d", line_count);
+	map = alloc_columns(file, line_count);
+	num_lines = *line_count;
 	if (map == NULL)
 		return (NULL);
 	fd = open(file, O_RDONLY);
-	while (line_count > 0)
+	while (num_lines > 0)
 	{
 		map[i] = get_next_line(fd);
-		// printf("%s", map[i]);
-		line_count--;
+		num_lines--;
 		i++;
 	}
 	map[i] = NULL;
 	close(fd);
 	return (map);
-}
-
-/*Checks the validity of the map*/
-
-void valid_map(char**map)
-{
-	int	x;
-	int	y;
-	
-	x = 0;
-	y = 0;
-	// while (map[0][x] == 1)
-	// {
-	// 	x++;
-	// 	if (map[0][x] != 1)
-	// 	{
-	// 		error("The map is not valid");
-	// 		exit(0);
-	// 	}
-	// }
-	
-	while (map[0][x] != '\n')
-	{
-		if (map[0][x] != '1')
-		{
-			error("The map is not valid");
-			exit(0);
-		}
-		x++;
-	}
-	// while (map[y][x - 1] != '\n')
-	// {
-	// 	if (map[y][x - 1] != '1')
-	// 	{
-	// 		error("The map is not valid");
-	// 		exit(0);
-	// 	}
-	// 	y++;
-	// }
-	// y = 0;
-	while (map[y][0] == '1')
-	{
-		y++;
-		if (map[y][0] != '1')
-		{
-			error("The map is not valid");
-			exit(0);
-		}
-	}
-	//Check the walls - rows and collumns of 1
-	//Check if there are walls going through 
-
 }
 
 /* Creates -with malloc- a tilemap acording to the
@@ -145,13 +92,15 @@ t_tile	**map_init(int argc, char **argv, t_game *game)
 {
 	char	**map;
 	t_tile	**tilemap;
+	int		line_count;
 
 	// if (!valid_file(argc, argv[1]))
 	// 	return (NULL);
 	// if (map == NULL)
 	// 	return (NULL);
-	map = read_map(argv[1]);
-	// valid_map(map);
+	line_count = 0;
+	map = read_map(argv[1], &line_count);
+	map_validity_check(map, line_count);
 	tilemap = generate_tilemap(map, game);
 	ft_free_chartable(map);
 	if (tilemap == NULL)

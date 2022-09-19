@@ -169,14 +169,14 @@ typedef struct s_game
 	void			*white_panel;
 }	t_game;
 
-typedef struct s_map_data_checker
+typedef struct s_map_data
 {
 	t_vector		size;
 	t_vector		curs;
 	t_bool			one_P;
 	t_bool			one_E;
 	t_bool			at_least_one_C;
-}	t_map_data_checker;
+}				t_map_data;
 
 void	game_init(t_game *game);
 int		end_program(t_game *game);
@@ -192,7 +192,7 @@ void	*new_panel(t_game *game, t_color color);
 void	render(t_game game);
 int		update(t_game *game);
 t_bool  move_to(t_game *game, t_tile *tile);
-int	input(int key, t_game *game);
+int		input(int key, t_game *game);
 t_enemy	*new_enemy(t_enemyytpe type, t_tile *tile);
 t_enemy	*last_enemy(t_enemy *list);
 void	add_enemy(t_game *game, t_enemyytpe type, t_tile *tile);
@@ -202,5 +202,10 @@ t_bool	move_hor(t_enemy *enemy, t_game *game);
 void	enemy_animation(t_enemy_img *img);
 void	kill_player(t_game *game, t_vector pos);
 void	valid_map(char **map);
+int		map_validity_check(char **map, int line_count);
+void	unique_tiles_check(char **map, t_map_data map_data);
+//Utils
+
+int	ft_strlen_nl(const char *c);
 
 #endif
