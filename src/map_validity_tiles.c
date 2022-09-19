@@ -6,11 +6,12 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:55:08 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/19 14:31:40 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:49:00 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
 
 
 static void	check_valid_char(char c)

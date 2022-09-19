@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:46:44 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/19 10:20:39 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:03:30 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,18 @@ int	ft_strlen_nl(const char *c)
 	while (c[i] != '\0' && c[i] != '\n')
 		i++;
 	return (i);
+}
+
+void	check_file_extension(char *s)
+{
+	while (*s != '\0')
+		s++;
+	s = s - 4;
+	if (ft_strncmp(s, ".ber", 4) != 0)
+	{
+		error("Wrong file extension");
+		exit(1);
+	}
+	else
+		return;
 }

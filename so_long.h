@@ -205,7 +205,7 @@ void	valid_map(char **map);
 int		map_validity_check(char **map, int line_count);
 void	unique_tiles_check(char **map, t_map_data map_data);
 //Utils
-
-int	ft_strlen_nl(const char *c);
+void	check_file_extension(char *s);
+int		ft_strlen_nl(const char *c);
 
 #endif
