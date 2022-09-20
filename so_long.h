@@ -40,6 +40,7 @@ typedef struct s_tile
 	t_tiletype		type;
 	t_tiletype		og_type;
 	t_vector		position;
+	t_vector		size;
 	struct s_tile	*up;
 	struct s_tile	*down;
 	struct s_tile	*left;
@@ -174,6 +175,7 @@ typedef struct s_map_data
 	t_vector		size;
 	t_vector		curs;
 	t_bool			one_P;
+	t_vector		player_position;
 	t_bool			one_E;
 	t_bool			at_least_one_C;
 }				t_map_data;
@@ -191,7 +193,7 @@ void	color_panel(t_panel *panel, t_color color);
 void	*new_panel(t_game *game, t_color color);
 void	render(t_game game);
 int		update(t_game *game);
-t_bool  move_to(t_game *game, t_tile *tile);
+t_bool	move_to(t_game *game, t_tile *tile);
 int		input(int key, t_game *game);
 t_enemy	*new_enemy(t_enemyytpe type, t_tile *tile);
 t_enemy	*last_enemy(t_enemy *list);
@@ -202,10 +204,13 @@ t_bool	move_hor(t_enemy *enemy, t_game *game);
 void	enemy_animation(t_enemy_img *img);
 void	kill_player(t_game *game, t_vector pos);
 void	valid_map(char **map);
-int		map_validity_check(char **map, int line_count);
-void	unique_tiles_check(char **map, t_map_data map_data);
+int		map_validity_check(char **map, int line_count, t_game *game);
+void	unique_tiles_check(char **map, t_map_data *map_data);
 //Utils
 void	check_file_extension(char *s);
 int		ft_strlen_nl(const char *c);
+void	check_valid_path(char **map, t_map_data *map_data, t_game *game);
+void	unique_tiles_check_after_flood(char **map, t_map_data *map_data);
+char	**map_dup(char **map, t_map_data map_data);
 
 #endif

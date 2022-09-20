@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/19 15:01:37 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:41:10 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	**alloc_columns(char *file, int *line_count)
 	char	**map;
 
 	*line_count = file_linecount(file);
-	printf("low level linecount : %d", *line_count);
+
 	if (*line_count <= 0)
 		return (null_error("open or reading error, the file may not exist"));
 	map = malloc(sizeof(char *) * *line_count + 1);
@@ -100,7 +100,7 @@ t_tile	**map_init(int argc, char **argv, t_game *game)
 	// 	return (NULL);
 	line_count = 0;
 	map = read_map(argv[1], &line_count);
-	map_validity_check(map, line_count);
+	map_validity_check(map, line_count, game);
 	tilemap = generate_tilemap(map, game);
 	ft_free_chartable(map);
 	if (tilemap == NULL)
@@ -129,7 +129,7 @@ int	start(t_game *game, int argc, char **argv)
 	game_init(game);
 	return (1);
 }
-
+//TODO:adding a random char at the end of the map does not work
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -139,10 +139,10 @@ int	main(int argc, char **argv)
 	if (argc > 2)
 		printf("Too many args");
 	check_file_extension(argv[1]);
-	// if (start(&game, argc, argv) == 0)
-	// 	return (0);
-	// mlx_hook(game.window, 2, 0, input, (void*)&game);
-	// mlx_loop_hook(game.mlx, update, (void*)&game);
-	// mlx_loop(game.mlx);
+	if (start(&game, argc, argv) == 0)
+		return (0);
+	mlx_hook(game.window, 2, 0, input, (void*)&game);
+	mlx_loop_hook(game.mlx, update, (void*)&game);
+	mlx_loop(game.mlx);
 	return (0);
 }

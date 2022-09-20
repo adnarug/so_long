@@ -23,6 +23,7 @@ SRC_FILES	=	get_next_line\
 				enemy\
 				map_validity_checker\
 				map_validity_tiles\
+				valid_path\
 				main
 
 SRC		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

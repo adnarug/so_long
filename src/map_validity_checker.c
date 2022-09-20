@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:56:37 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/19 13:26:55 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:20:32 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,17 @@ static int rectang_check(char **map, t_map_data map_data)
 	return (valid);
 }
 
-int		map_validity_check(char **map, int line_count)
+int		map_validity_check(char **map, int line_count, t_game *game)
 {
 	t_map_data	map_data;
 	t_bool		valid;
-
-	printf("LEN Y %d", line_count);
+	char		**map_duplicate;
+	 
 	map_data = init_mapdatachecker(map, line_count);
 	borders_integrity(map, map_data);
 	valid = rectang_check(map, map_data);
-	unique_tiles_check(map, map_data);
+	unique_tiles_check(map, &map_data);
+	map_duplicate = map_dup(map, map_data);
+	check_valid_path(map_duplicate, &map_data, game);
 	return (valid);
 }
