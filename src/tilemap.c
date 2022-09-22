@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:21:50 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/16 09:54:09 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:21:34 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ void	set_gamevars(t_tile *tile, t_game *game, char c)
 		game->collects++;
 	else if (tile->type == ENEMY)
 		add_enemy(game, c, tile);
+	if (tile->type == EXIT)
+		(*tile).was_exit = TRUE;
+	else
+		(*tile).was_exit = FALSE;
 }
 
 /* Set the size, original type and neighboors of the <x><y> tile of <tilemap>  */

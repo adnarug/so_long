@@ -9,6 +9,8 @@
 # include <unistd.h>
 # include "./Printf/ft_printf.h"
 # define IMG_SIZE 64
+# define IMAC_RES_Y 1344
+# define IMAC_RES_X 2560
 
 typedef enum e_bool
 {
@@ -21,6 +23,7 @@ typedef struct s_vector
 {
 	int x;
 	int y;
+	t_bool	is_found;
 }	t_vector;
 
 typedef enum e_tiletype
@@ -41,6 +44,7 @@ typedef struct s_tile
 	t_tiletype		og_type;
 	t_vector		position;
 	t_vector		size;
+	t_bool			was_exit;
 	struct s_tile	*up;
 	struct s_tile	*down;
 	struct s_tile	*left;
@@ -212,5 +216,7 @@ int		ft_strlen_nl(const char *c);
 void	check_valid_path(char **map, t_map_data *map_data, t_game *game);
 void	unique_tiles_check_after_flood(char **map, t_map_data *map_data);
 char	**map_dup(char **map, t_map_data map_data);
+char	**alloc_columns(char *file, int *line_count);
+void	move_through_exit(t_game *game, t_tile *tile);
 
 #endif

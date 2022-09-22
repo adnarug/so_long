@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:46:44 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/19 15:03:30 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:58:30 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ void	free_enemies(t_game *game)
 /* Frees all allocated memory and makes exit(0) */
 int	end_program(t_game *game)
 {
+	system("leaks so_long");
 	free_tilemap(game);
 	game->tilemap = NULL;
 	free_enemies(game);
 	game->enemy_list = NULL;
+	mlx_destroy_window((*game).mlx, (*game).window);
 	exit(0);
 }
 
@@ -95,9 +97,11 @@ void	ft_free_chartable(char **table)
 	while (table[i])
 	{
 		free(table[i]);
+		table[i] = NULL;
 		i++;
 	}
 	free(table);
+	table = NULL;
 }
 
 int	ft_strlen_nl(const char *c)

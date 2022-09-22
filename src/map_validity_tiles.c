@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:55:08 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/20 17:55:08 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:13:17 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,18 @@ void	unique_tiles_check(char **map, t_map_data *map_data)
 {
 	(*map_data).curs.x = 0;
 	(*map_data).curs.y = 0;
+	(*map_data).player_position.is_found = FALSE;
 	while ((*map_data).curs.y != (*map_data).size.y)
 	{
 		while((*map_data).curs.x != (*map_data).size.x)
 		{
 			check_valid_char(map[(*map_data).curs.y][(*map_data).curs.x]);
 			map_data = check_unique_E_P(map[(*map_data).curs.y][(*map_data).curs.x], map_data);
-			if ((*map_data).one_P == TRUE)
+			if ((*map_data).one_P == TRUE && (*map_data).player_position.is_found == FALSE)
+			{
 				(*map_data).player_position = (*map_data).curs;
+				(*map_data).player_position.is_found = TRUE;
+			}
 			(*map_data).curs.x++;
 		}
 		(*map_data).curs.x = 0;
@@ -91,14 +95,12 @@ void	unique_tiles_check_after_flood(char **map, t_map_data *map_data)
 	{
 		while((*map_data).curs.x != (*map_data).size.x)
 		{
-	
-			if (map[(*map_data).curs.y][(*map_data).curs.x] != 'X' &&\
-				map[(*map_data).curs.y][(*map_data).curs.x] != '1')
+			if (map[(*map_data).curs.y][(*map_data).curs.x] == 'E' ||
+				map[(*map_data).curs.y][(*map_data).curs.x] == 'C')
 			{
-				error("Not a valid map");
+				error("There is no valid path");
 				exit(1);
 			}
-			 
 			(*map_data).curs.x++;
 		}
 		(*map_data).curs.x = 0;

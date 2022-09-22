@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:56:37 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/20 18:20:32 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:45:20 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ static t_map_data	init_mapdatachecker(char **map, int line_count)
 
 	map_data.size.x = ft_strlen(map[0]) - 1;
 	map_data.size.y = line_count - 1;
+	if ((map_data.size.x * IMG_SIZE) > IMAC_RES_X)
+	{
+		error("The map will not fit in the screen");
+		exit (1);
+	}
+	if ((map_data.size.y * IMG_SIZE) > IMAC_RES_Y)
+	{
+		error("The map will not fit in the screen");
+		exit (1);
+	}
 	map_data.one_P = FALSE;
 	map_data.one_E = FALSE;
 	map_data.at_least_one_C = FALSE;
@@ -27,7 +37,6 @@ static t_map_data	init_mapdatachecker(char **map, int line_count)
 }
 
 /*Checks the validity of the map*/
-
 static void borders_integrity(char **map, t_map_data map_data)
 {
 	//top border
@@ -95,12 +104,13 @@ int		map_validity_check(char **map, int line_count, t_game *game)
 	t_map_data	map_data;
 	t_bool		valid;
 	char		**map_duplicate;
-	 
+
 	map_data = init_mapdatachecker(map, line_count);
 	borders_integrity(map, map_data);
 	valid = rectang_check(map, map_data);
 	unique_tiles_check(map, &map_data);
 	map_duplicate = map_dup(map, map_data);
 	check_valid_path(map_duplicate, &map_data, game);
+	ft_free_chartable(map_duplicate);
 	return (valid);
 }
