@@ -1,5 +1,5 @@
 NAME	= so_long.a
-CFLAGS	= -Wall -Wextra -g #Werror
+CFLAGS	= -g -Wall -Wextra -Werror
 LIBMLX	= lib/
 CC		= cc
 LIBS	= $(LIBMLX)/libmlx.a -framework Cocoa -framework OpenGL -framework IOKit
@@ -21,7 +21,9 @@ SRC_FILES	=	get_next_line\
 				update\
 				tilemap\
 				input\
-				enemy\
+				enemy_move\
+				enemy_init\
+				step_on\
 				map_validity_checker\
 				map_validity_tiles\
 				valid_path\
@@ -32,7 +34,6 @@ SRC_FILES	=	get_next_line\
 SRC		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ		=	$(addprefix	$(OBJ_DIR), $(addsuffix .o, $(SRC_FILES))) 
 
-BONUS = 
 all: libmlx $(NAME)
 
 libmlx:
@@ -54,15 +55,17 @@ $(OBJ_DIR)%.o	:	$(SRC_DIR)%.c | $(OBJF)
 
 clean:
 	@rm -r $(OBJ_DIR)
+	
 	@make clean -C $(PRINTF)
 	@$(MAKE) -C $(LIBMLX) clean
 
-bonus: $(OBJ_B) 
+bonus: $(OBJ) 
 	@make -s $(OBJ) INCLUDE="$(BONUS_INCLUDE)"
-	@echo  "$(GREEN)so_long is compiled with bonus!$(DEF_COLOR)"
+	@echo  "$(GREEN)so_long is compiled with bonus header $(DEF_COLOR)"
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -rf a.out
 	@rm -f ./libmlx.a 
 	@rm -rf so_long
 	@rm -rf $(PRINTF)/libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:46:44 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/25 14:20:21 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:39:40 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	free_enemies(t_game *game)
 /* Frees all allocated memory and makes exit(0) */
 int	end_program(t_game *game)
 {
-	system("leaks so_long");
 	free_tilemap(game);
 	game->tilemap = NULL;
 	free_enemies(game);
 	game->enemy_list = NULL;
 	mlx_destroy_window((*game).mlx, (*game).window);
+	system("leaks so_long");
 	exit(0);
 }
 

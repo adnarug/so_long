@@ -1,11 +1,20 @@
-#ifndef SO_LONG_H
-# define SO_LONG_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/25 18:10:56 by pguranda          #+#    #+#             */
+/*   Updated: 2022/09/25 18:15:28 by pguranda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 # include "../lib/mlx.h"
 # include <stdlib.h>
-# include <stdio.h>//to be deleted
 # include <fcntl.h>
-# include <string.h>//to be deleted
 # include <unistd.h>
 # include "../Printf/ft_printf.h"
 # define IMG_SIZE 64
@@ -20,9 +29,9 @@ typedef enum e_bool
 
 typedef struct s_vector
 {
-	int x;
-	int y;
-	t_bool	is_found;
+	int		x;
+	int		y;
+	t_bool	p_is_found;
 }	t_vector;
 
 typedef enum e_tiletype
@@ -33,7 +42,6 @@ typedef enum e_tiletype
 	PLAYER = 'P',
 	EXIT = 'E',
 	ENEMY = 'M',
-	FOLLOWER = 'F'
 }	t_tiletype;
 
 /* Struct for each tile */
@@ -51,30 +59,6 @@ typedef struct s_tile
 }	t_tile;
 
 // ---------- IMAGES
-
-/* All posible wall images */
-typedef struct s_wall_img
-{
-	void	*block;
-}	t_wall_img;
-
-/* Collectables animation info */
-typedef struct s_coll_img
-{
-	void	*current_img;
-	int		anim_frames;
-	void	*img_0;
-	void	*img_1;
-}	t_collect_img;
-
-/* Info for the particle-like effect */
-typedef struct s_effect
-{
-	void		*img;
-	t_vector	pos;
-	int			frames;
-	int			counter;
-}	t_effect;
 
 /* An image that covers the whole window */
 typedef struct s_panel
@@ -98,7 +82,6 @@ typedef struct s_enemy_imgs
 {
 	int		basic_anim;
 	void	*basic_current;
-	void	*basic_up;
 	void	*basic_low;
 	void	*basic_mid;
 }	t_enemy_img;
@@ -139,7 +122,6 @@ typedef struct s_player
 	void	*action_img;
 }	t_player;
 
-
 typedef struct s_game
 {
 	void			*mlx;
@@ -152,12 +134,10 @@ typedef struct s_game
 	int				moves;
 	t_enemy			*enemy_list;
 	t_vector		img_size;
-	t_wall_img		wall_imgs;
-	t_collect_img	collects_imgs;
+	void			*wall_img;
+	void			*collects_imgs;
 	t_enemy_img		enemy_imgs;
-	void			*door_open_img;
 	void			*door_close_img;
-	t_effect		effect;
 	void			*red_panel;
 	void			*white_panel;
 }	t_game;
@@ -166,21 +146,17 @@ typedef struct s_map_data
 {
 	t_vector		size;
 	t_vector		curs;
-	t_bool			one_P;
+	t_bool			one_p;
 	t_vector		player_position;
-	t_bool			one_E;
-	t_bool			at_least_one_C;
+	t_bool			one_e;
+	t_bool			at_least_one_c;
 }				t_map_data;
 //Main
 void	game_init(t_game *game);
 t_tile	**map_init(char **argv, t_game *game);
-char	**read_map(char *file, int *line_count);
-t_tile	**map_init(char **argv, t_game *game);
 
 //Map
-int	file_linecount(char *file);
-char	**malloc_columns(char *file, int *line_count);
-
+t_tile	**map_init(char **argv, t_game *game);
 
 //Map validity checker
 int		map_validity_check(char **map, int line_count);
@@ -188,16 +164,22 @@ int		map_validity_check(char **map, int line_count);
 //Border checks
 void	check_border_integrity(t_map_data *map_data, char **map);
 
+//Map validity tiles
+void	unique_tiles_check_after_flood(char **map, t_map_data *map_data);
+
+//input
+void	remove_player(t_game *game);
+void	kill_player(t_game *game);
+
 int		end_program(t_game *game);
 t_tile	**generate_tilemap(char **map, t_game *game);
-int		error(char *message);
+void	error(char *message);
 void	print_warning(char *message);
 void	*null_error(char *message);
 int		ft_chartable_linecount(char **table);
 void	ft_free_chartable(char **table);
-void	render(t_game game);
 int		update(t_game *game);
-t_bool	move_to(t_game *game, t_tile *tile);
+t_bool	step_to(t_game *game, t_tile *tile);
 int		input(int key, t_game *game);
 t_enemy	*new_enemy(t_enemyytpe type, t_tile *tile);
 t_enemy	*last_enemy(t_enemy *list);
@@ -210,6 +192,12 @@ void	kill_player(t_game *game);
 void	valid_map(char **map);
 int		map_validity_check(char **map, int line_count);
 void	unique_tiles_check(char **map, t_map_data *map_data);
+//step on 
+void	step_on_enemy(t_game *game);
+void	step_on_exit(t_game *game);
+void	step_through_exit(t_game *game, t_tile *tile);
+void	step_on_collect(t_game *game, t_tile *tile);
+void	step_on_empty(t_game *game, t_tile *tile);
 //Utils
 void	check_file_extension(char *s);
 int		ft_strlen_nl(const char *c);
@@ -217,6 +205,5 @@ void	check_valid_path(char **map, t_map_data *map_data);
 void	unique_tiles_check_after_flood(char **map, t_map_data *map_data);
 char	**map_dup(char **map, t_map_data map_data);
 char	**alloc_columns(char *file, int *line_count);
-void	move_through_exit(t_game *game, t_tile *tile);
 
 #endif

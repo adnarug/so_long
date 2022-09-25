@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:55:08 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/25 13:15:34 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:13:32 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,22 @@ static t_map_data	*check_unique_e_p(char c, t_map_data *map_data)
 {
 	if (c == 'P')
 	{
-		if ((*map_data).one_P == TRUE)
+		if ((*map_data).one_p == TRUE)
 			error("More than one player on the map");
 		else
 		{
-			(*map_data).one_P = TRUE;
+			(*map_data).one_p = TRUE;
 		}
 	}
 	if (c == 'E')
 	{
-		if ((*map_data).one_E == TRUE)
+		if ((*map_data).one_e == TRUE)
 			error("More than one exit on the map");
 		else
-			(*map_data).one_E = TRUE;
+			(*map_data).one_e = TRUE;
 	}
 	if (c == 'C')
-			(*map_data).at_least_one_C = TRUE;
+			(*map_data).at_least_one_c = TRUE;
 	return (map_data);
 }
 
@@ -48,7 +48,7 @@ void	unique_tiles_check(char **map, t_map_data *map_data)
 {
 	(*map_data).curs.x = 0;
 	(*map_data).curs.y = 0;
-	(*map_data).player_position.is_found = FALSE;
+	(*map_data).player_position.p_is_found = FALSE;
 	while ((*map_data).curs.y != (*map_data).size.y)
 	{
 		while ((*map_data).curs.x != (*map_data).size.x)
@@ -56,20 +56,20 @@ void	unique_tiles_check(char **map, t_map_data *map_data)
 			check_valid_char(map[(*map_data).curs.y][(*map_data).curs.x]);
 			map_data = check_unique_e_p \
 			(map[(*map_data).curs.y][(*map_data).curs.x], map_data);
-			if ((*map_data).one_P == TRUE && \
-			(*map_data).player_position.is_found == FALSE)
+			if ((*map_data).one_p == TRUE && \
+			(*map_data).player_position.p_is_found == FALSE)
 			{
 				(*map_data).player_position = (*map_data).curs;
-				(*map_data).player_position.is_found = TRUE;
+				(*map_data).player_position.p_is_found = TRUE;
 			}
 			(*map_data).curs.x++;
 		}
 		(*map_data).curs.x = 0;
 		(*map_data).curs.y++;
 	}
-	if ((*map_data).one_E == FALSE || (*map_data).one_P == FALSE)
+	if ((*map_data).one_e == FALSE || (*map_data).one_p == FALSE)
 		error("Not all ements are present on the map - check E and P");
-	if ((*map_data).at_least_one_C == FALSE)
+	if ((*map_data).at_least_one_c == FALSE)
 		error("Not enough collectables");
 }
 
@@ -83,9 +83,10 @@ void	unique_tiles_check_after_flood(char **map, t_map_data *map_data)
 		{
 			if (map[(*map_data).curs.y][(*map_data).curs.x] == 'E' ||
 				map[(*map_data).curs.y][(*map_data).curs.x] == 'C')
-				error("There is no valid path");
+				error("There is no valid path on the map");
 			(*map_data).curs.x++;
 		}
+		ft_printf("\n");
 		(*map_data).curs.x = 0;
 		(*map_data).curs.y++;
 	}

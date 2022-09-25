@@ -6,7 +6,7 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 09:32:19 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/25 13:27:43 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:20:34 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,10 @@ static char	**malloc_columns(char *file, int *line_count)
 
 	*line_count = file_linecount(file);
 	if (*line_count <= 0)
-	{
-		null_error("could not open/read the file,\
-		it may not exist or the path/name is wrong");
-		exit (1);
-	}
+		error("could not read the file, it may not exist or the path is wrong");
 	map = malloc(sizeof(char *) * *line_count + 1);
 	if (map == NULL)
-	{
-		null_error("malloc error, when creating the map");
-		exit (1);
-	}
+		error("malloc error, when creating the map");
 	return (map);
 }
 

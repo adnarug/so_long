@@ -6,17 +6,10 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 13:25:28 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/25 13:26:24 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:20:36 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/mlx.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <math.h>
-#include <memory.h>
 #include "../include/so_long.h"
 
 /*Driver function to make the map and initialize structs*/
@@ -28,8 +21,8 @@ static void	launch(t_game *game, char **argv)
 	if (game->tilemap == NULL)
 		error("Map initialization error");
 	game->og_collects = game->collects;
-	game->player.idle_frames = 23;
-	game->enemy_imgs.basic_anim = 20;
+	game->player.idle_frames = 20;
+	game->enemy_imgs.basic_anim = 17;
 	game_init(game);
 	return ;
 }

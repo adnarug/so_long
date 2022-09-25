@@ -6,24 +6,16 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 08:46:44 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/25 13:14:22 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:09:24 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-
 /* Returns NULL printing <message> in red */
 void	error(char *message)
 {
-	printf("\033[0;31m" " Error\n %s\n" "\033[0m", message);
-	exit (1);
-}
-
-/* Returns NULL printing <message> in red */
-void	*null_error(char *message)
-{
-	printf("\033[0;31m" " Error\n %s\n" "\033[0m", message);
+	ft_printf("Error\n%s\n", message);
 	exit (1);
 }
 
@@ -58,5 +50,5 @@ void	check_file_extension(char *s)
 		exit(1);
 	}
 	else
-		return;
+		return ;
 }

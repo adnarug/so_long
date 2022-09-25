@@ -6,12 +6,12 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:21:50 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/23 09:43:49 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:07:15 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
- 
+
 /* Allocates memory to save a tilemap with same size as <map> */
 t_tile	**alloc_tilemap(char **map)
 {
@@ -24,7 +24,7 @@ t_tile	**alloc_tilemap(char **map)
 	i = 0;
 	while (map[i] != NULL)
 	{
-		tilemap[i] = malloc(sizeof(t_tile) * strlen(*map) + 1);
+		tilemap[i] = malloc(sizeof(t_tile) * ft_strlen(*map) + 1);
 		if (tilemap == NULL)
 		{
 			while (i > 0)
@@ -67,7 +67,7 @@ void	set_gamevars(t_tile *tile, t_game *game, char c)
 		(*tile).was_exit = FALSE;
 }
 
-/* Set the size, original type and neighboors of the <x><y> tile of <tilemap>  */
+/* Set the size, original type and neighboorsTODO: do i need the neighboors*/
 void	setup_tile(t_tile **tilemap, int x, int y)
 {
 	tilemap[y][x].og_type = tilemap[y][x].type;
@@ -88,10 +88,8 @@ t_tile	**generate_tilemap(char **map, t_game *game)
 	t_tile		**tilemap;
 	int			x;
 	int			y;
-	
+
 	tilemap = alloc_tilemap(map);
-	if (tilemap == NULL)
-		return (NULL);
 	y = 0;
 	game->enemy_list = NULL;
 	while (map[y] != NULL)
