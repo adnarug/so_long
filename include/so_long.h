@@ -1,13 +1,13 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "./lib/mlx.h"
+# include "../lib/mlx.h"
 # include <stdlib.h>
 # include <stdio.h>//to be deleted
 # include <fcntl.h>
 # include <string.h>//to be deleted
 # include <unistd.h>
-# include "./Printf/ft_printf.h"
+# include "../Printf/ft_printf.h"
 # define IMG_SIZE 64
 # define IMAC_RES_Y 1344
 # define IMAC_RES_X 2560
@@ -17,7 +17,6 @@ typedef enum e_bool
 	TRUE = 1,
 	FALSE = 0
 }	t_bool;
-
 
 typedef struct s_vector
 {
@@ -87,17 +86,6 @@ typedef struct s_panel
 	int			line_size;
 	int			endian;
 }	t_panel;
-
-/* Color */
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-	int	a;
-}	t_color;
-
-// ---------- ENEMIES
 
 typedef enum e_enemytype
 {
@@ -183,18 +171,32 @@ typedef struct s_map_data
 	t_bool			one_E;
 	t_bool			at_least_one_C;
 }				t_map_data;
-
+//Main
 void	game_init(t_game *game);
+t_tile	**map_init(char **argv, t_game *game);
+
+
+//Map
+
+
+t_tile	**map_init(char **argv, t_game *game);
+
+//Map validity checker
+int		map_validity_check(char **map, int line_count);
+
+//Border checks
+void	check_border_integrity(t_map_data *map_data, char **map);
+
+//Map validity tiles
+void	unique_tiles_check_after_flood(char **map, t_map_data *map_data);
+
 int		end_program(t_game *game);
 t_tile	**generate_tilemap(char **map, t_game *game);
-int		error(char *message);
+void		error(char *message);
 void	print_warning(char *message);
 void	*null_error(char *message);
 int		ft_chartable_linecount(char **table);
 void	ft_free_chartable(char **table);
-t_color	new_color(int r, int g, int b, int a);
-void	color_panel(t_panel *panel, t_color color);
-void	*new_panel(t_game *game, t_color color);
 void	render(t_game game);
 int		update(t_game *game);
 t_bool	move_to(t_game *game, t_tile *tile);
@@ -206,14 +208,14 @@ void	move_enemies(t_game *game);
 t_bool	move_ver(t_enemy *enemy, t_game *game);
 t_bool	move_hor(t_enemy *enemy, t_game *game);
 void	enemy_animation(t_enemy_img *img);
-void	kill_player(t_game *game, t_vector pos);
+void	kill_player(t_game *game);
 void	valid_map(char **map);
-int		map_validity_check(char **map, int line_count, t_game *game);
+int		map_validity_check(char **map, int line_count);
 void	unique_tiles_check(char **map, t_map_data *map_data);
 //Utils
 void	check_file_extension(char *s);
 int		ft_strlen_nl(const char *c);
-void	check_valid_path(char **map, t_map_data *map_data, t_game *game);
+void	check_valid_path(char **map, t_map_data *map_data);
 void	unique_tiles_check_after_flood(char **map, t_map_data *map_data);
 char	**map_dup(char **map, t_map_data map_data);
 char	**alloc_columns(char *file, int *line_count);

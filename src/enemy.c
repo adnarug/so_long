@@ -6,12 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:52:03 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/16 10:45:28 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/23 09:41:46 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
-
+#include "../include/so_long.h"
 
 void	enemy_animation(t_enemy_img *img)
 {
@@ -56,7 +55,7 @@ t_bool	move_hor(t_enemy *enemy, t_game *game)
 		else if (enemy->tile->left->type == PLAYER)
 		{
 			move_enemy_to(enemy, enemy->tile->left);
-			kill_player(game, enemy->tile->position);
+			kill_player(game);
 		}
 		else
 			return (change_dir(enemy));
@@ -68,7 +67,7 @@ t_bool	move_hor(t_enemy *enemy, t_game *game)
 		else if (enemy->tile->right->type == PLAYER)
 		{
 			move_enemy_to(enemy, enemy->tile->right);
-			kill_player(game, enemy->tile->position);
+			kill_player(game);
 		}
 		else
 			return (change_dir(enemy));
@@ -86,7 +85,7 @@ t_bool	move_ver(t_enemy *enemy, t_game *game)
 		else if (enemy->tile->up->type == PLAYER)
 		{
 			move_enemy_to(enemy, enemy->tile->up);
-			kill_player(game, enemy->tile->position);
+			kill_player(game);
 		}
 		else
 			return (change_dir(enemy));
@@ -98,7 +97,7 @@ t_bool	move_ver(t_enemy *enemy, t_game *game)
 		else if (enemy->tile->down->type == PLAYER)
 		{
 			move_enemy_to(enemy, enemy->tile->down);
-			kill_player(game, enemy->tile->position);
+			kill_player(game);
 		}
 		else
 			return (change_dir(enemy));

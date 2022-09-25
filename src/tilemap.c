@@ -6,11 +6,11 @@
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:21:50 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/22 16:21:34 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/23 09:43:49 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../include/so_long.h"
  
 /* Allocates memory to save a tilemap with same size as <map> */
 t_tile	**alloc_tilemap(char **map)

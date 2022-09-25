@@ -1,12 +1,13 @@
-NAME	:= so_long.a
-CFLAGS	:= -Wall -Wextra -g #Werror
-LIBMLX	:= lib/
-CC		:= cc
-LIBS	:= $(LIBMLX)/libmlx.a -framework Cocoa -framework OpenGL -framework IOKit
-OBJ_DIR	:= objs/
-SRC_DIR	:= src/
-PRINTF	:= Printf/
-#SRC_FILES	:= $(shell find ./src -iname "*.c")
+NAME	= so_long.a
+CFLAGS	= -Wall -Wextra -g #Werror
+LIBMLX	= lib/
+CC		= cc
+LIBS	= $(LIBMLX)/libmlx.a -framework Cocoa -framework OpenGL -framework IOKit
+BONUS_INCLUDE	= include/ft_printf_bonus.h
+OBJ_DIR	= objs/
+SRC_DIR	= src/
+PRINTF	= Printf/
+
 AR		:= ar rcs
 
 DEF_COLOR = \033[0;80m
@@ -15,8 +16,8 @@ GREEN = \033[0;92m
 SRC_FILES	=	get_next_line\
 				get_next_line_utils\
 				utils\
+				utils_mem\
 				game_init\
-				newpanel\
 				update\
 				tilemap\
 				input\
@@ -24,11 +25,14 @@ SRC_FILES	=	get_next_line\
 				map_validity_checker\
 				map_validity_tiles\
 				valid_path\
+				border_checks\
+				map\
 				main
 
 SRC		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ		=	$(addprefix	$(OBJ_DIR), $(addsuffix .o, $(SRC_FILES))) 
 
+BONUS = 
 all: libmlx $(NAME)
 
 libmlx:
@@ -52,6 +56,10 @@ clean:
 	@rm -r $(OBJ_DIR)
 	@make clean -C $(PRINTF)
 	@$(MAKE) -C $(LIBMLX) clean
+
+bonus: $(OBJ_B) 
+	@make -s $(OBJ) INCLUDE="$(BONUS_INCLUDE)"
+	@echo  "$(GREEN)so_long is compiled with bonus!$(DEF_COLOR)"
 
 fclean: clean
 	@rm -f $(NAME)

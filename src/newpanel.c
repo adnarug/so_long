@@ -1,52 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_panel.c                                        :+:      :+:    :+:   */
+/*   newpanel.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pguranda <pguranda@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 09:10:54 by pguranda          #+#    #+#             */
-/*   Updated: 2022/09/08 14:00:56 by pguranda         ###   ########.fr       */
+/*   Updated: 2022/09/23 10:26:36 by pguranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../include/so_long.h"
 
-/* Returns a t_color struct */
-t_color	new_color(int r, int g, int b, int a)
-{
-	t_color	color;
-
-	color.r = (char)r;
-	color.g = (char)g;
-	color.b = (char)b;
-	color.a = (char)a;
-	return (color);
-}
-
-/* Set all pixels in <panel> to <color> */
-void	color_panel(t_panel *panel, t_color color)
-{
-	int	x;
-	int	y;
-
-	panel->pixels = mlx_get_data_addr(panel->pointer, &panel->bpp,
-			&panel->line_size, &panel->endian);
-	y = 0;
-	while (y < panel->size.y)
-	{
-		x = 0;
-		while (x < panel->size.x)
-		{
-			panel->pixels[(x * 4 + panel->line_size * y) + 0] = color.b;
-			panel->pixels[(x * 4 + panel->line_size * y) + 1] = color.g;
-			panel->pixels[(x * 4 + panel->line_size * y) + 2] = color.r;
-			panel->pixels[(x * 4 + panel->line_size * y) + 3] = color.a;
-			x += 1;
-		}
-		y += 1;
-	}
-}
 
 /* Returns a colored image of the same size as the window */
 void	*new_panel(t_game *game, t_color color)
